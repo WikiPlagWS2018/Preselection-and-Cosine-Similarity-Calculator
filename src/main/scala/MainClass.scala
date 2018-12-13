@@ -2,9 +2,6 @@
 import org.apache.spark.{SparkContext, SparkConf}
 import com.datastax.spark.connector._
 
-//ctrl shift p
-
-
 object MainClass {
     def main(args: Array[String]): Unit = {
 
@@ -38,6 +35,7 @@ object MainClass {
 
 
       idfDict.saveToCassandra("wikitest", "idf2", SomeColumns("word", "value"))
+      sc.stop()
       println("IDF saved")
 
     }
