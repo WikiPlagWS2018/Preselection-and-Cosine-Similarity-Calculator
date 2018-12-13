@@ -2,10 +2,13 @@
 import org.apache.spark.{SparkContext, SparkConf}
 import com.datastax.spark.connector._
 
+//ctrl shift p
+
+
 object MainClass {
     def main(args: Array[String]): Unit = {
 
-      //Configuration:
+      //Create a SparkContext to initialize Spark
       val conf = new SparkConf()
       conf.setMaster("local")
       conf.setAppName("Word Count")
@@ -16,25 +19,32 @@ object MainClass {
         .set("spark.cassandra.auth.password", "9p6a_U-W")
         //.setMaster("local[*]").setAppName(getClass.getName)
 
-      val sc = new SparkContext(conf)
-      val rdd = sc.cassandraTable("wikitest", "tokenized")
 
+      val sc = new SparkContext(conf)
+
+      val rdd = sc.cassandraTable("wikitest", "tokenized")
 
 
 
       //IDF Berechnung
       val totalDocumentsSize = rdd.count()
+      val regex = "^[a-zÀ-ÿ]+$"
+
       val wordsInDocs = rdd.map(x => ( x.get[Int]("docid"),x.get[List[String]]("tokens")  ) )
-             .flatMap(x => x._2.distinct).groupBy(x => x)
+        .flatMap(x => x._2.distinct)
+        .filter(x=> (x matches regex) && (x.length>=2) )
+        .groupBy(x => x)
+
       val idfDict = wordsInDocs.map(x => (x._1, totalDocumentsSize / x._2.size))
 
 
-
-
-      //Cassandra Speicherung
       idfDict.saveToCassandra("wikitest", "idf2", SomeColumns("word", "value"))
       println("IDF saved")
+
+
     }
   }
 
+
 //PROBLEM: mit 383 dokumente, idf table = 113524
+//mit Filter werden dann: 109051
