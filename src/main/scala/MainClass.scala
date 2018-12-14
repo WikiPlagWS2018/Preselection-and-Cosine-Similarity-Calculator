@@ -7,6 +7,7 @@ object MainClass {
 
       //Create a SparkContext to initialize Spark
       val conf = new SparkConf()
+<<<<<<< HEAD
 //      conf.setMaster("local")
       conf.setAppName("[WIKIPLAG] create IDF")
 
@@ -21,9 +22,11 @@ object MainClass {
       val rdd = sc.cassandraTable("wiki2018", "tokens")
 
       println("start calculation")
+
       //IDF Berechnung
       val totalDocumentsSize = rdd.count()
       val regex = "^[a-zÀ-ÿ]+$"
+      println("Start spark calculation")
 
       val idfDict = rdd.map(x => ( x.get[Int]("docid"),x.get[List[String]]("tokens")  ) )
         .flatMap(x => x._2.distinct)
