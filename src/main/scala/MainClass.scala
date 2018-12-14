@@ -7,7 +7,6 @@ object MainClass {
 
       //Create a SparkContext to initialize Spark
       val conf = new SparkConf()
-<<<<<<< HEAD
 //      conf.setMaster("local")
       conf.setAppName("[WIKIPLAG] create IDF")
 
