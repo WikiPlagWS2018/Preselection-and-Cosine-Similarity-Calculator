@@ -7,7 +7,7 @@ object MainClass {
 
       //Create a SparkContext to initialize Spark
       val conf = new SparkConf()
-      conf.setMaster("local")
+      //conf.setMaster("local")
       conf.setAppName("IDF")
 
 
@@ -19,13 +19,14 @@ object MainClass {
 
       val sc = new SparkContext(conf)
 
-      val rdd = sc.cassandraTable("wikitest", "tokenized")
-
+      val rdd = sc.cassandraTable("wiki2018", "tokens")
+      println("Spark init")
 
 
       //IDF Berechnung
       val totalDocumentsSize = rdd.count()
       val regex = "^[a-zÀ-ÿ]+$"
+      println("Start spark calculation")
 
       val idfDict = rdd.map(x => ( x.get[Int]("docid"),x.get[List[String]]("tokens")  ) )
         .flatMap(x => x._2.distinct)
@@ -33,8 +34,8 @@ object MainClass {
         .groupBy(x => x)
         .map(x => (x._1, totalDocumentsSize / x._2.size))
 
-
-      idfDict.saveToCassandra("wikitest", "idf2", SomeColumns("word", "value"))
+      println("Start save to Cassandra:")
+      idfDict.saveToCassandra("wiki2018", "idf", SomeColumns("word", "value"))
       sc.stop()
       println("IDF saved")
 
