@@ -1,6 +1,8 @@
+package preselection
 
 import org.apache.spark.{SparkContext, SparkConf}
 import com.datastax.spark.connector._
+import scala.reflect.api.materializeTypeTag
 
 object MainClass {
     def main(args: Array[String]): Unit = {
