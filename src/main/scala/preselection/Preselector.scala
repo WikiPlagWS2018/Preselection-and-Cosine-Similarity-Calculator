@@ -53,9 +53,10 @@ class Preselector(userinput: String) {
    */
   def getTopNWords(n: Int): List[String] = this.idfInput.toList.sortWith((A, B) => A._2 < B._2).map(_._1).take(n)
 
-  def getTopN(n: Int): Map[Int, List[String]] = {
+  def getTopN(n: Int): Map[String, List[String]] = {
     val importantWords = getTopNWords(n)
-    corpus.filter(X => importantWords.diff(X._2).length < importantWords.length).collect().toMap
+    val topN = corpus.filter(X => importantWords.diff(X._2).length < importantWords.length).collect().toMap
+    topN.map(X => (X._1.toString(), X._2)) + ("userinput" -> this.tokenizeString(this.userinput))
   }
 
   def tokenizeString(s: String): List[String] = {
