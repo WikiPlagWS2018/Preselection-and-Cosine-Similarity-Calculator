@@ -6,9 +6,10 @@ object App {
    p.calculateIDF
    val importantDocuments = p.getTopN(100)
    val cjc = new CosineJaccardCalc(importantDocuments)
-   
+
    //System.out.println("\nHallo:" + p.getTopNWords(10))
    //System.out.println(p.getTopNWords(1000))
    //System.out.println(p.getTopN(1))
+    println("main done!")
   }
 }
