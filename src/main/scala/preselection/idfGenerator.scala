@@ -5,7 +5,7 @@ import com.datastax.spark.connector._
 import scala.reflect.api.materializeTypeTag
 
 object MainClass {
-    def main(args: Array[String]): Unit = {
+    def generate_idf(): Unit = {
 
       //Create a SparkContext to initialize Spark
       val conf = new SparkConf()

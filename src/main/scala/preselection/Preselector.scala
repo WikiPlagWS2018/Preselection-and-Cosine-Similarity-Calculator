@@ -7,18 +7,18 @@ class Preselector(userinput: String) {
 
   //Create a SparkContext to initialize Spark
   val conf = new SparkConf()
-  //      conf.setMaster("local")
+  conf.setMaster("local[*]")
   conf.setAppName("[WIKIPLAG] create IDF")
 
   conf.set("spark.cassandra.connection.host", "hadoop05.f4.htw-berlin.de")
     .set("spark.cassandra.auth.username", "s0556238")
     .set("spark.cassandra.auth.password", "9p6a_U-W")
-  //.setMaster("local[*]").setAppName(getClass.getName)
+    .setMaster("local[*]").setAppName(getClass.getName)
   println("spark config OK")
 
   val sc = new SparkContext(conf)
-  val idfRdd = sc.cassandraTable("wiki2018", "idf2")
-  val tokenRdd = sc.cassandraTable("wiki2018", "tokens")
+  val idfRdd = sc.cassandraTable("wikitest", "idf2")
+  val tokenRdd = sc.cassandraTable("wikitest", "tokenized") //wiki2018 tokens
 
   /**
    * (word, idf value) map from the cassandra database
@@ -41,6 +41,7 @@ class Preselector(userinput: String) {
   def calculateIDF = {
     val input = this.userinput
     this.idfInput = this.tokenizeString(input).map(X => (X, this.wikiIdf.getOrElse(X, 0.0))).filter(X => X._2 != 0.0).toMap
+    print(idfInput)
   }
 
   /**
@@ -51,11 +52,12 @@ class Preselector(userinput: String) {
   /**
    * get the top n words - n words with the highest idf
    */
-  def getTopNWords(n: Int): List[String] = this.idfInput.toList.sortWith((A, B) => A._2 < B._2).map(_._1).take(n)
+  def getTopNWords(n: Int): List[String] = this.idfInput.toList.sortWith((A, B) => A._2 > B._2).map(_._1).take(n)
 
   def getTopN(n: Int): Map[String, List[String]] = {
+    print(this.idfInput)
     val importantWords = getTopNWords(n)
-    val topN = corpus.filter(X => importantWords.diff(X._2).length < importantWords.length).collect().toMap
+    val topN = corpus.filter(X => importantWords.diff(X._2).length > importantWords.length).collect().toMap
     topN.map(X => (X._1.toString(), X._2)) + ("userinput" -> this.tokenizeString(this.userinput))
   }
 
