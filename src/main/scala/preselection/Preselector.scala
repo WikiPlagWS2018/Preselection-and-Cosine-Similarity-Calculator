@@ -24,7 +24,7 @@ class Preselector(userinput: String) {
 //  val tokenRdd = sc.cassandraTable("wikitest", "tokenized")
 
   // production
-  val idfRdd = sc.cassandraTable("wiki2018", "idf2")
+  val idfRdd = sc.cassandraTable("wiki2018", "idf")
   val tokenRdd = sc.cassandraTable("wiki2018", "tokens")
 
   def isEmpty[T](rdd : RDD[T]) = {
