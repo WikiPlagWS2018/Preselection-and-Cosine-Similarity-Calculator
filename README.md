@@ -1,4 +1,5 @@
 # Preselection and Cosine Similary Calculator
+This module gets the user input as ```String``` and returns the **cosine similarity & jaccard distance of the user input to the documents which we define as most important for the classification of plagiarism**(from the preselector).
 
 ## Getting Started
 In order to create a ```.jar``` you need to have **sbt** installed. Just enter following command:
