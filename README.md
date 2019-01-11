@@ -5,7 +5,7 @@ In order to create a ```.jar``` you need to have **sbt** installed. Just enter f
 ```bash
 sbt clean assembly
 ```
-This creates a ```.jar``` in the ```target``` dictionary.
+This creates a ```.jar``` in the ```target``` dictionary. After running you should have a ```output.txt``` which the ```CosineJaccardCalc.scala``` created and will be described later on.
 
 ## Preselection
 ### General Idea
