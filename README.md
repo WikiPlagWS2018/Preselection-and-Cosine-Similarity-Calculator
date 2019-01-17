@@ -8,6 +8,22 @@ sbt clean assembly
 ```
 This creates a ```.jar``` in the ```target``` dictionary. After running you should have a ```output.txt``` which the ```CosineJaccardCalc.scala``` created and will be described later on.
 
+connect to the hadoop cluster via ssh
+```bash
+ssh s0558366@hadoop05.f4.htw-berlin.de
+```
+
+load .jar to hadoop cluster via scp
+```bash
+scp target/scala-2.11/WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar s0558366@hadoop05.f4.htw-berlin.de:~
+```
+
+start .jar with spark - 10G optional
+```bash
+spark2-submit --master yarn --executor-memory 16G --driver-memory 6G ~/WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar > ~/std_out.out 2> ~/std_err.err &
+```
+  
+
 ## Preselection
 ### General Idea
 Our plagiarism algorithm wants to compare the user input with Wikipedia articles at runtime and calculate certain key values/features. **In order to reduce the number of documents to be compared, a preselection should run before the actual plagiarism algorithm, which passes on the documents relevant only for the classification to the plagiarism algorithm/other modules.**
