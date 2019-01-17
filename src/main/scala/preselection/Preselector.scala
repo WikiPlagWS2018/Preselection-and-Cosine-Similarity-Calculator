@@ -17,7 +17,7 @@ class Preselector(userinput: String) {
   println("spark config OK")
 
   val sc = new SparkContext(conf)
-  val idfRdd = sc.cassandraTable("wiki2018", "idf2")
+  val idfRdd = sc.cassandraTable("wiki2018", "idf")
   val tokenRdd = sc.cassandraTable("wiki2018", "tokens") //wiki2018 tokens
 
   /**
