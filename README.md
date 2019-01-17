@@ -13,14 +13,14 @@ connect to the hadoop cluster via ssh
 ssh s0558366@hadoop05.f4.htw-berlin.de
 ```
 
-load .jar to hadoop cluster via scp
+load .jar to hadoop cluster via scp **if the cluster doesn't have sbt**
 ```bash
 scp target/scala-2.11/WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar s0558366@hadoop05.f4.htw-berlin.de:~
 ```
 
-start .jar with spark - 10G optional
+start .jar with spark (you need to go to the .jar directory first)
 ```bash
-spark2-submit --master yarn --executor-memory 16G --driver-memory 6G ~/WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar > ~/std_out.out 2> ~/std_err.err &
+spark2-submit --master yarn --executor-memory 10G --driver-memory 6G WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar > std_out.out 2> std_err.err &
 ```
   
 
