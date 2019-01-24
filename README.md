@@ -52,5 +52,15 @@ val importantDocuments = p.getTopN(N) //returns the map
 ```
 This also means that in order for our ```Preselector``` to work you always need to call ```calculateIDF()``` first.
 
+### Problems
+
+- The Preselector selects too many Documents for Cosine and Jaccard Similarity
+  - Add  some more inverse indexes to reduce the amount of important documents to be checked
+  - Quick and easy: just select the first 10 documents and trash the others
+- The tokenized words in the documents are still not correct
+  - , symbol is still in the database  
+  - stopwords and unimportant documents are still in there
+  - The pipeline which adds the tokenized documents to the database has to be updated/changed so that we get a better quality of documents
+
 ## Cosine Similarity
 
