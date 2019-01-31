@@ -11,8 +11,8 @@ class Preselector(userinput: String) {
   conf.setAppName("[WIKIPLAG] create IDF")
 
   conf.set("spark.cassandra.connection.host", "hadoop05.f4.htw-berlin.de")
-    .set("spark.cassandra.auth.username", "s0556238")
-    .set("spark.cassandra.auth.password", "9p6a_U-W")
+    .set("spark.cassandra.auth.username", "********") // user name for spark cluster
+    .set("spark.cassandra.auth.password", "*******") //password for spark cluster
     .setMaster("local[*]").setAppName(getClass.getName)
   println("spark config OK")
 
