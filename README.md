@@ -65,7 +65,13 @@ This also means that in order for our ```Preselector``` to work you always need 
 ### Information about Implementation
 
 ## Problems
-- **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity  
+- **Optimizing Cosine Jaccard Calculation** 
+  - The current implementation doesn't use spark
+  - In order to fully use our hadoop cluster, we need to rewrite the code to spark
+  - **Solution:** Replace current implementation with a spark implementation
+- **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity 
+  - The Cosine Jaccard Calculator creates N-Grams from the Userinput and the "important documents"
+  - This leads to a problem because if there are too many documents our implementation
   - **Solution:** Add  some more inverse indexes to reduce the amount of important documents to be checked
   - **Alternative: Quick and easy:** just select the first 10 documents and trash the others
 - **Quality of documents are too poor:** 
