@@ -65,9 +65,8 @@ This also means that in order for our ```Preselector``` to work you always need 
 ### Information about Implementation
 
 ## Problems
-- **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity
+- **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity  
   - **Solution:** Add  some more inverse indexes to reduce the amount of important documents to be checked
-    - Check how often a word appears in a document and select the important document based on that alias use **TF-IDF** too to select important documents
   - **Alternative: Quick and easy:** just select the first 10 documents and trash the others
 - **Quality of documents are too poor:** 
   - Some of the tokenized words in the documents are still not correct
