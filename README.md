@@ -47,7 +47,7 @@ We use this value to output the "most important" words in the user input and to 
 ```idfGenerator.scala``` creates a IDF-value for every word in our database and adds the calculated value to our database. Following snippet should work:
 
 ```scala
-new MainClass().generate_idf()
+new Generator().generate_idf()
 ```
 
 ```Preselector.scala``` gets the user input as ```String``` and returns the documents with the ```N``` most important words as map ```map[String, List[String]]```. This can be done:
@@ -73,5 +73,4 @@ This also means that in order for our ```Preselector``` to work you always need 
   - Some of the tokenized words in the documents are still not correct
   - Symbols like ‚‘ or ; or , are still in the database  
   - Stopwords and unimportant documents are still in there like „2edasdasd“ or „as“ or „123123“
-  - **Solution:** The pipeline which adds the tokenized documents to the database has to be updated/changed so that we get a better quality of documents
-    - Fix the problem at the root
+  - **Solution:** The pipeline/preprocessor/parser which adds the tokenized documents to the database has to be updated/changed so that we get a better quality of documents
