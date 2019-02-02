@@ -1,5 +1,5 @@
 # Preselection and Cosine Similary Calculator
-This module gets the user input as ```String``` and returns the **cosine similarity & jaccard distance of the user input to the documents which we define as most important for the classification of plagiarism**(from the preselector).
+This module gets the user input as ```String``` and saves the **cosine similarity & jaccard distance of the n-grams from the user input to the n-grams from the documents which we define as most important for the classification of plagiarism** in a ```output.txt```. 
 - Cosine Similarity: Max & Rene
 - Preselection: Steven
 - Generator: Claudio
@@ -75,7 +75,7 @@ This also means that in order for our ```Preselector``` to work you always need 
 - **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity 
   - The Cosine Jaccard Calculator creates N-Grams from the Userinput and the "important documents"
   - This leads to a problem because if there are too many documents our current implementation takes too long
-  - try to **optimize the cosine jaccard calculator** first before adding more indexes
+  - try to **optimize the cosine jaccard calculator** first before adding more inverse indexes **for a better performance**
   - **Solution:** Add  some more inverse indexes to reduce the amount of important documents to be checked
 - **Quality of documents are too poor:** 
   - Some of the tokenized words in the documents are still not correct
