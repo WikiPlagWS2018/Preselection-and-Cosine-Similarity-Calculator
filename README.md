@@ -2,6 +2,7 @@
 This module gets the user input as ```String``` and returns the **cosine similarity & jaccard distance of the user input to the documents which we define as most important for the classification of plagiarism**(from the preselector).
 - Cosine Similarity: Max & Rene
 - Preselection: Steven
+- Generator: Claudio
 
 ## Getting Started
 This repository creates a ```.jar``` in the ```target``` dictionary. After running you should have a ```output.txt``` which the ```CosineJaccardCalc.scala``` created and will be described later on.
