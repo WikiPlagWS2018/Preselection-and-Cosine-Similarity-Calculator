@@ -2,24 +2,32 @@
 This module gets the user input as ```String``` and returns the **cosine similarity & jaccard distance of the user input to the documents which we define as most important for the classification of plagiarism**(from the preselector).
 
 ## Getting Started
+This repository creates a ```.jar``` in the ```target``` dictionary. After running you should have a ```output.txt``` which the ```CosineJaccardCalc.scala``` created and will be described later on.
+
+connect to the hadoop cluster via ssh - you have to insert your HTW-Student Number here
+```bash
+ssh s0XXXXX@hadoop05.f4.htw-berlin.de
+```
+
+clone the repository
+```bash
+git clone https://github.com/WikiPlagWS2018/Preselection-and-Cosine-Similary-Calculator.git
+```
+
 In order to create a ```.jar``` you need to have **sbt** installed. Just enter following command:
 ```bash
+cd Preselection-and-Cosine-Similary-Calculator
 sbt clean assembly
 ```
-This creates a ```.jar``` in the ```target``` dictionary. After running you should have a ```output.txt``` which the ```CosineJaccardCalc.scala``` created and will be described later on.
 
-connect to the hadoop cluster via ssh
-```bash
-ssh s0558366@hadoop05.f4.htw-berlin.de
-```
-
-load .jar to hadoop cluster via scp **if the cluster doesn't have sbt**
+load .jar to hadoop cluster via scp **if the cluster doesn't have sbt then skip this**
 ```bash
 scp target/scala-2.11/WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar s0558366@hadoop05.f4.htw-berlin.de:~
 ```
 
 start .jar with spark (you need to go to the .jar directory first)
 ```bash
+cd target/scala-2.11
 spark2-submit --master yarn --executor-memory 10G --driver-memory 6G WikiIDFApp-assembly-0.1.0-SNAPSHOT.jar > std_out.out 2> std_err.err &
 ```
   
