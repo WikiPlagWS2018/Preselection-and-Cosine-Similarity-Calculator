@@ -69,9 +69,9 @@ This also means that in order for our ```Preselector``` to work you always need 
 
 ## Problems
 - **Optimizing Cosine Jaccard Calculation** 
-  - The current implementation doesn't use spark
-  - In order to fully use our hadoop cluster, we need to rewrite the code to spark
-  - **Solution:** Replace current implementation with a spark implementation
+  - The current implementation doesn't use spark to calculate the features
+  - In order to fully use our hadoop cluster, we need to rewrite the code
+  - **Solution:** Replace current implementation with a spark implementation - that means working with RDD and methods provided by spark
 - **Too many documents selected:** The Preselector selects too many Documents for Cosine and Jaccard Similarity 
   - The Cosine Jaccard Calculator creates N-Grams from the Userinput and the "important documents"
   - This leads to a problem because if there are too many documents our current implementation takes too long
