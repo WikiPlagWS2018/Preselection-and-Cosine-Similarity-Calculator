@@ -62,10 +62,25 @@ val importantDocuments = p.getTopN(N) //returns the map
 ```
 This also means that in order for our ```Preselector``` to work you always need to call ```calculateIDF()``` first.
 
-## Cosine Similarity
+## Cosine and Jaccard Similarity
 ### General Idea
 
 ### Information about Implementation
+
+
+## Neural Network
+### General Idea
+As Input, we have the Cosinus/Jaccard Similarity of all possible 13-Gramm's Pairs between the Preselection and the text to check.
+Our target is to identify which Pair is plagiarism. Therefore we use a Neural Network with two Input neurons (Cosinus/Jaccard Similarity) and two Output neurons (Plagiarism/No plagiarism). To train the Network, we created examples of 13-Gramm Pairs with Cosinus/Jaccard Similarity and labeled which pairs were plagiarism and which were not.
+
+### Data
+
+### Network architecture
+
+### Evaluation
+
+### Information about Implementation
+
 
 ## Problems
 - **Optimizing Cosine Jaccard Calculation** 
