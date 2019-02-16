@@ -64,8 +64,17 @@ This also means that in order for our ```Preselector``` to work you always need 
 
 ## Cosine and Jaccard Similarity
 ### General Idea
+Our goal here is to compare the user input with all relevant documents selected during preselection. This is achieved by splitting all documents into [n-grams](https://en.wikipedia.org/wiki/N-gram) and then comparing each n-gram from the user document against each n-gram from the pool of pre-selected comparison files from Wikipedia.The results of these comparisons is then saved into a text file ```output.txt``` which serves as the input for the neural network
+
+For the comparison we decided on two different algorithms. [Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity) and [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index)
 
 ### Information about Implementation
+```CosineJaccardCalc``` compares all documents with each other and creates the output text. 
+```scala
+new CosineJaccardCalc(importantDocuments)
+```
+The one parameter is a ```Map[String, List[String]]``` of all documents which are to be compared. This map needs at least 2 entries of which one must be the ``userinput``. As long as these conditions are met the latest output.txt file will be overwritten with all the new comparison values.
+
 
 ## Problems
 - **Optimizing Cosine Jaccard Calculation** 
